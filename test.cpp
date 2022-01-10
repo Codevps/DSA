@@ -1,5 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+/*
+* Remember to put <<time and space complexity >>limitations on the code !!!! 
+*/
 // functions-----------------------------------------------------------------------
 void fibonacci(int n)
 {
@@ -192,37 +196,53 @@ void btd(int n)
     cout << binary << endl;
 }
 
-/*---------------------------------------------------------------------------*/
-int main()
+void arraySum(int n, int arr[])
 {
-    int n;
-    cin >> n;
-    // int r;
-    // cin >> r;
-    // int arr[n];
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cin >> arr[i];
-    // }
-    // int key;
-    // cin >> key;
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum = sum + arr[i];
+    }
+    cout << sum << endl;
+}
 
-    /*function*/
-    // fibonacci(n);
-    // armstrong(n);
-    // cout << reverse(n) << endl;
-    // cout << prime(n) << endl;
-    // permutation(n, r);
-    // combination(n, r);
-    // pattern(n); // spaces
-    // dtb(n);
-    // btd(n);
+void swapAlternate(int n, int arr[])
+{
+    for (int i = 0; i < n; i += 2)
+    {
+        if (i + 1 < n)
+        {
+            swap(arr[i], arr[i + 1]);
+        }
+    }
 
-    // Array:
-    // min_maxArray(n, arr);
-    // search in array
-    // linearSearch(n, arr, key);
-    // binarySearch(n, arr, key);
-    // ascending order:
-    // linearSort(n, arr);
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int unique(int n, int arr[])
+{
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        ans = ans ^ arr[i];
+    }
+    return ans;
+}
+
+int duplicates(int n, int arr[])
+{
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        ans = ans ^ arr[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        ans = ans ^ i;
+    }
+    return ans;
 }
