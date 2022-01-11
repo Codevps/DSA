@@ -246,3 +246,41 @@ int duplicates(int n, int arr[])
     }
     return ans;
 }
+
+/*{
+    int leftSum(int x, int arr[])
+{
+    int sum = 0;
+    for (int i = 0; i <= x - 1; i++)
+    {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int rightSum(int n, int arr[], int i)
+{
+    int sum = 0;
+    for (int j = i + 1; j < n; j++)
+    {
+        sum = sum + arr[j];
+    }
+    return sum;
+}
+
+// Pivot of unsorted array
+int pivot(int n, int arr[])
+{
+    int i = 0;
+    while (i < n)
+    {
+        if (leftSum(i, arr) == rightSum(n, arr, i))
+        {
+            return i;
+        }
+        i++;
+    }
+    return -1;
+}
+
+}
+*/
