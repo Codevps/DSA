@@ -282,5 +282,25 @@ int pivot(int n, int arr[])
     return -1;
 }
 
+// reverse array 
+ // here m is the number from where you have to start reversing the array if no need of m keep it as 0
+void reverse(int n, int arr[], int m)
+{
+    int s = m + 1, e = n - 1;
+    while (s <= e)
+    {
+        int temp = arr[s];
+        arr[s] = arr[e];
+        arr[e] = temp;
+        s++;
+        e--;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
 }
 */
