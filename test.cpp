@@ -283,15 +283,16 @@ int pivot(int n, int arr[])
 }
 
 // reverse array 
+
  // here m is the number from where you have to start reversing the array if no need of m keep it as 0
 void reverse(int n, int arr[], int m)
 {
     int s = m + 1, e = n - 1;
     while (s <= e)
     {
+        // swap(arr[s] , arr[e]  or
         int temp = arr[s];
         arr[s] = arr[e];
-        arr[e] = temp;
         s++;
         e--;
     }
@@ -302,5 +303,72 @@ void reverse(int n, int arr[], int m)
     cout << endl;
 }
 
+// merge sorted array:
+void print(int ans[], int s)
+{
+    for (int i = 0; i < s; i++)
+    {
+        cout << ans[i] << " ";
+    }
+    cout << endl;
+}
+void mergeSortedArrays(int n, int arr[], int m, int arr2[], int l, int arr3[])
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    while (i < n && j < m)
+    {
+        if (arr[i] <= arr2[j])
+        {
+            arr3[k] = arr[i];
+            i++;
+        }
+        else
+        {
+            arr3[k] = arr2[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < n)
+    {
+        arr3[k] = arr[i];
+        k++;
+        i++;
+    }
+
+    while (j < m)
+    {
+        arr3[k] = arr2[j];
+        k++;
+        j++;
+    }
+
+    print(arr3, l);
+}
+
+
+bool checkPalindrome(string s)
+{
+    // the range of character is 65 to 90 , 
+    isalpha and isdigit are two stl c++ inbuilt functions
+        string str = "";
+        for (int i = 0; i< s.length() ; i++) {
+            if(isalpha(s[i]) || isdigit(s[i])) {
+                
+                if(int(s[i]) >= 65 && int(s[i]) <= 90)
+                    str += (s[i] - 'A' + 'a');
+                else str += s[i];
+            }
+        }
+        int st = 0, e = str.length() - 1;
+        while(st <= e) {
+            if(str[st++] != str[e--]) {
+                return false;
+            }
+        }
+        return true;
+} 
 }
 */
