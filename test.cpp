@@ -372,3 +372,71 @@ bool checkPalindrome(string s)
 } 
 }
 */
+
+void merge(int *arr, int s, int e)
+{
+    int mid = s + (e - s) / 2;
+
+    // declaring length;
+    int len1 = mid - s + 1;
+    int len2 = e - mid;
+
+    // declaring two new array:
+    int first[len1];
+    int second[len2];
+
+    // copying two array:
+    int index = s;
+    for (int i = 0; i < len1; i++)
+    {
+        first[i] = arr[index++];
+    }
+    index = mid + 1;
+    for (int i = 0; i < len2; i++)
+    {
+        second[i] = arr[index++];
+    }
+
+    // merg ing arrays
+    int index1 = 0;
+    int index2 = 0;
+    index = s;
+    while (index1 < len1 && index2 < len2)
+    {
+        if (first[index1] < second[index2])
+        {
+            arr[index++] = first[index1++];
+        }
+        else
+        {
+            arr[index++] = second[index2++];
+        }
+    }
+
+    while (index1 < len1)
+    {
+        arr[index++] = first[index1++];
+    }
+    while (index2 < len2)
+    {
+        arr[index++] = second[index2++];
+    }
+}
+void mergeSort(int *arr, int s, int e)
+{
+    // basecase:
+    if (s >= e)
+    {
+        return;
+    }
+    int mid = s + (e - s) / 2;
+    // left split
+    mergeSort(arr, s, mid);
+
+    // right split
+    mergeSort(arr, mid + 1, e);
+
+    // merge them all:
+
+    merge(arr, s, e);
+}
