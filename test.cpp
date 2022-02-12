@@ -373,37 +373,38 @@ bool checkPalindrome(string s)
 }
 */
 
+// merge sort :
 void merge(int *arr, int s, int e)
 {
     int mid = s + (e - s) / 2;
 
-    // declaring length;
+    // dynamic memory allocation:
     int len1 = mid - s + 1;
     int len2 = e - mid;
 
-    // declaring two new array:
-    int first[len1];
-    int second[len2];
+    int *first = new int[len1];
+    int *second = new int[len2];
 
-    // copying two array:
+    // copy array:
     int index = s;
     for (int i = 0; i < len1; i++)
     {
         first[i] = arr[index++];
     }
+
     index = mid + 1;
     for (int i = 0; i < len2; i++)
     {
         second[i] = arr[index++];
     }
 
-    // merg ing arrays
+    // merge:
     int index1 = 0;
     int index2 = 0;
     index = s;
     while (index1 < len1 && index2 < len2)
     {
-        if (first[index1] < second[index2])
+        if (first[index1] <= second[index2])
         {
             arr[index++] = first[index1++];
         }
@@ -412,7 +413,6 @@ void merge(int *arr, int s, int e)
             arr[index++] = second[index2++];
         }
     }
-
     while (index1 < len1)
     {
         arr[index++] = first[index1++];
@@ -421,8 +421,12 @@ void merge(int *arr, int s, int e)
     {
         arr[index++] = second[index2++];
     }
+
+    delete[] first;
+    delete[] second;
 }
-void mergeSort(int *arr, int s, int e)
+
+void solve(int *arr, int s, int e)
 {
     // basecase:
     if (s >= e)
@@ -430,42 +434,38 @@ void mergeSort(int *arr, int s, int e)
         return;
     }
     int mid = s + (e - s) / 2;
-    // left split
-    mergeSort(arr, s, mid);
 
-    // right split
-    mergeSort(arr, mid + 1, e);
+    // merge left:
+    solve(arr, s, mid);
 
-    // merge them all:
+    // merge right:
+    solve(arr, mid + 1, e);
 
+    // merge:
     merge(arr, s, e);
 }
 
 // quicksort
+
 int partition(int *arr, int s, int e)
 {
-    // swapping algorithm:
     int pivot = arr[s];
-
-    int cnt = 0;
-    for (int i = s + 1; i < e; i++)
+    int count = 0;
+    for (int i = s + 1; i <= e; i++)
     {
         if (arr[i] <= pivot)
         {
-            cnt++;
+            count++;
         }
     }
-    // pivot's right position
-    int pivotIndex = cnt + s;
-    // swapping them
+    int pivotIndex = count + s;
     swap(arr[pivotIndex], arr[s]);
 
-    // managing left and right part:
     int i = s;
     int j = e;
     while (i < pivotIndex && j > pivotIndex)
     {
-        while (arr[i] < pivot)
+        while (arr[i] <= pivot)
         {
             i++;
         }
@@ -480,19 +480,150 @@ int partition(int *arr, int s, int e)
     }
     return pivotIndex;
 }
-void quickSort(int *arr, int s, int e)
+
+void solve(int *arr, int s, int e)
 {
     // basecase:
     if (s >= e)
     {
         return;
     }
-    // partition
+
+    // do partition
     int p = partition(arr, s, e);
 
-    // left split
-    quickSort(arr, s, p - 1);
-
-    // right split
-    quickSort(arr, p + 1, e);
+    // sort left and right:
+    solve(arr, s, p - 1);
+    solve(arr, p + 1, e);
 }
+
+// subset
+class Solution
+{
+private:
+    void solve(vector<int> nums, vector<vector<int>> &ans, vector<int> output, int index)
+    {
+        //         base case:
+        if (index >= nums.size())
+        {
+            ans.push_back(output);
+            return;
+        }
+
+        //         exlcude:
+        solve(nums, ans, output, index + 1);
+        //         include:
+        int element = nums[index];
+        output.push_back(element);
+        solve(nums, ans, output, index + 1);
+    }
+
+public:
+    vector<vector<int>> subsets(vector<int> &nums)
+    {
+        vector<vector<int>> ans;
+        vector<int> output;
+        int index = 0;
+        solve(nums, ans, output, index);
+        return ans;
+    }
+};
+// subsequences
+
+void solve(string str, vector<string> &ans, string output, int index)
+{
+    //     base case:
+    if (index >= str.length())
+    {
+        if (output.length() > 0)
+        {
+            ans.push_back(output);
+        }
+        return;
+    }
+    //         exclude case:
+    solve(str, ans, output, index + 1);
+
+    //         include case:
+    char element = str[index];
+    output.push_back(element);
+    solve(str, ans, output, index + 1);
+}
+vector<string> subsequences(string str)
+{
+    vector<string> ans;
+    string output = "";
+    int index = 0;
+    solve(str, ans, output, index);
+    return ans;
+}
+
+// phonekeypad
+class Solution
+{
+private:
+    void solve(string digit, string output, int index, vector<string> &ans, string mapping[])
+    {
+
+        //base case
+        if (index >= digit.length())
+        {
+            ans.push_back(output);
+            return;
+        }
+
+        int number = digit[index] - '0';
+        string value = mapping[number];
+
+        for (int i = 0; i < value.length(); i++)
+        {
+            output.push_back(value[i]);
+            solve(digit, output, index + 1, ans, mapping);
+            output.pop_back();
+        }
+    }
+
+public:
+    vector<string> letterCombinations(string digits)
+    {
+        vector<string> ans;
+        if (digits.length() == 0)
+            return ans;
+        string output;
+        int index = 0;
+        string mapping[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        solve(digits, output, index, ans, mapping);
+        return ans;
+    }
+};
+
+//permutation:
+class Solution
+{
+private:
+    void solve(vector<int> nums, vector<vector<int>> &ans, int index)
+    {
+        //basecase:
+        if (index >= nums.size())
+        {
+            ans.push_back(nums);
+            return;
+        }
+
+        for (int i = index; i < nums.size(); i++)
+        {
+            swap(nums[index], nums[i]);
+            solve(nums, ans, index + 1);
+            swap(nums[index], nums[i]);
+        }
+    }
+
+public:
+    vector<vector<int>> permute(vector<int> &nums)
+    {
+        vector<vector<int>> ans;
+        int index = 0;
+        solve(nums, ans, index);
+        return ans;
+    }
+};
