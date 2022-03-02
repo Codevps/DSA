@@ -2,8 +2,8 @@
 using namespace std;
 
 /*
-* Remember to put <<time and space complexity >>limitations on the code !!!! 
-*/
+ * Remember to put <<time and space complexity >>limitations on the code !!!!
+ */
 // functions-----------------------------------------------------------------------
 void fibonacci(int n)
 {
@@ -165,6 +165,7 @@ void linearSort(int n, int arr[])
 }
 void dtb(int n)
 {
+    // using bit
     int binary = 0;
     while (n != 0)
     {
@@ -174,6 +175,7 @@ void dtb(int n)
     }
     cout << binary << endl;
 
+    // without using bit operator
     int binary = 0;
     while (n != 0)
     {
@@ -225,9 +227,12 @@ void swapAlternate(int n, int arr[])
 
 int unique(int n, int arr[])
 {
+    // two times occuring only one element is occuring one time
     int ans = 0;
     for (int i = 0; i < n; i++)
     {
+        // n^n = 0;
+        // n^0 = n;
         ans = ans ^ arr[i];
     }
     return ans;
@@ -247,8 +252,8 @@ int duplicates(int n, int arr[])
     return ans;
 }
 
-/*{
-    int leftSum(int x, int arr[])
+// pivot of an array:
+int leftSum(int x, int arr[])
 {
     int sum = 0;
     for (int i = 0; i <= x - 1; i++)
@@ -282,9 +287,9 @@ int pivot(int n, int arr[])
     return -1;
 }
 
-// reverse array 
+// reverse array
 
- // here m is the number from where you have to start reversing the array if no need of m keep it as 0
+// here m is the number from where you have to start reversing the array if no need of m keep it as 0
 void reverse(int n, int arr[], int m)
 {
     int s = m + 1, e = n - 1;
@@ -348,32 +353,35 @@ void mergeSortedArrays(int n, int arr[], int m, int arr2[], int l, int arr3[])
     print(arr3, l);
 }
 
-
 bool checkPalindrome(string s)
 {
-    // the range of character is 65 to 90 , 
-    isalpha and isdigit are two stl c++ inbuilt functions
-        string str = "";
-        for (int i = 0; i< s.length() ; i++) {
-            if(isalpha(s[i]) || isdigit(s[i])) {
-                
-                if(int(s[i]) >= 65 && int(s[i]) <= 90)
-                    str += (s[i] - 'A' + 'a');
-                else str += s[i];
-            }
+    // the range of character is 65 to 90 ,
+    // isalpha and isdigit are two stl c++ inbuilt functions
+    string str = "";
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (isalpha(s[i]) || isdigit(s[i]))
+        {
+
+            if (int(s[i]) >= 65 && int(s[i]) <= 90)
+                str += (s[i] - 'A' + 'a');
+            else
+                str += s[i];
         }
-        int st = 0, e = str.length() - 1;
-        while(st <= e) {
-            if(str[st++] != str[e--]) {
-                return false;
-            }
+    }
+    int st = 0, e = str.length() - 1;
+    while (st <= e)
+    {
+        if (str[st++] != str[e--])
+        {
+            return false;
         }
-        return true;
-} 
+    }
+    return true;
 }
-*/
 
 // merge sort :
+// split array in half and sort it and merge both of them
 void merge(int *arr, int s, int e)
 {
     int mid = s + (e - s) / 2;
@@ -446,7 +454,8 @@ void solve(int *arr, int s, int e)
 }
 
 // quicksort
-
+// array given should be ascending
+// do partiton and the put the first element in its right place and then if left side of that element is greater than the element or its right side then swap
 int partition(int *arr, int s, int e)
 {
     int pivot = arr[s];
@@ -510,7 +519,7 @@ private:
             return;
         }
 
-        //         exlcude:
+        //         exclude:
         solve(nums, ans, output, index + 1);
         //         include:
         int element = nums[index];
@@ -565,7 +574,7 @@ private:
     void solve(string digit, string output, int index, vector<string> &ans, string mapping[])
     {
 
-        //base case
+        // base case
         if (index >= digit.length())
         {
             ans.push_back(output);
@@ -597,13 +606,13 @@ public:
     }
 };
 
-//permutation:
+// permutation:
 class Solution
 {
 private:
     void solve(vector<int> nums, vector<vector<int>> &ans, int index)
     {
-        //basecase:
+        // basecase:
         if (index >= nums.size())
         {
             ans.push_back(nums);
@@ -627,3 +636,52 @@ public:
         return ans;
     }
 };
+
+// book allocation problem: minimum no of pages alloted to a student01
+int isPossible(int n, int arr[], int m, int mid)
+{
+    int students = 0;
+    int pageSum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (pageSum + arr[i] <= mid)
+        {
+            pageSum += arr[i];
+        }
+        else
+        {
+            students++;
+            if (students > m || arr[i] > mid)
+            {
+                return false;
+            }
+            pageSum = arr[i];
+        }
+    }
+    return true;
+}
+int allocation(int n, int arr[], int m)
+{
+    int s = 0;
+    int e = 0;
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        e += arr[i];
+    }
+    int mid = s + (e - s) / 2;
+    while (s <= e)
+    {
+        if (isPossible(n, arr, m, mid))
+        {
+            ans = mid;
+            e = mid - 1;
+        }
+        else
+        {
+            s = mid + 1;
+        }
+        mid = s + (e - s) / 2;
+    }
+    return ans;
+}
