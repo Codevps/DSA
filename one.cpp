@@ -481,7 +481,7 @@ Node* reverseLinkedList(Node *head)
 }
 
 
-find the middle:
+// find the middle:
 int getLength(Node *head){
     int len = 0;
     while(head !=NULL){
@@ -503,6 +503,7 @@ Node *findMiddle(Node *head) {
     Node *fast = head->next;
 
     while(fast !=NULL){
+        //{increment fast by 2 <fast->next->next> but also check if fast->next == }
         fast = fast->next;
         if(fast != NULL){
             fast = fast->next;
