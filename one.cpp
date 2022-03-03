@@ -525,4 +525,31 @@ Node *findMiddle(Node *head) {
 
 }
 
+// reverse in k groups :**IMPORTANT**
+Node* kReverse(Node* head, int k) {
+//     base case:
+    if(head == NULL){
+        return NULL;
+    }
+    //reverse 1st k Nodes:
+    Node *next = NULL;
+    Node *prev = NULL;
+    Node *curr = head;
+    int count = 0;
+    while(curr != NULL && count < k){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        count++;
+    }
+    //setp 2: Recursion:
+    if(next !=NULL){
+        head->next = kReverse( next, k) ;
+    }
+
+    //step 3: return
+    return prev;
+
+}
 */
