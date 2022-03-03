@@ -469,7 +469,7 @@ Node* reverseLinkedList(Node *head)
 // 	}
 //     return prev;
 
-    //recurrsion:for loop converted to linkedList.
+    //recursion:for loop converted to linkedList.
 //    	Node *curr =  head;
 // 	Node *prev = NULL;
 //    	reverse(head,curr,prev);
