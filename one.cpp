@@ -503,7 +503,7 @@ Node *findMiddle(Node *head) {
     Node *fast = head->next;
 
     while(fast !=NULL){
-        //{increment fast by 2 <fast->next->next> but also check if fast->next == }
+        //{increment fast by 2 <fast->next->next> && increment slow with 1<slow->next> but also check if (fast->next == NULL) if yes then terminate  }
         fast = fast->next;
         if(fast != NULL){
             fast = fast->next;
@@ -514,7 +514,7 @@ Node *findMiddle(Node *head) {
 
 
 
-    //O(n) complexity:
+    //O(n) complexity: logic: middle will be half of full length of LL
     int len = getLength(head);
     int ans = (len/2);
     Node *temp = head;
