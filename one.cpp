@@ -354,7 +354,7 @@ void insertT(Node *&tail, int element, int d)
         {
             curr = curr->next;
         }
-        // element found
+        // element found: here temp is to be place ahead of curr;
         Node *temp = new Node(d);
         temp->next = curr->next;
         curr->next = temp;
@@ -362,7 +362,7 @@ void insertT(Node *&tail, int element, int d)
 }
 void print(Node *tail)
 {
-    //condn 1 if tail is empty:
+    //condition 1 if tail is empty:
         if (tail == NULL)
     {
         cout << "list is empty" << endl;
@@ -426,4 +426,103 @@ int main()
     deleteNode(tail, 3);
     print(tail);
 }
+
+//reverse linked list(singly)
+void reverse(Node *&head, Node *curr, Node *prev){
+
+     //basecase:
+    if(curr == NULL){
+        head = prev;
+        return;
+    }
+    Node *forward = curr->next;
+    reverse(head,forward,curr);
+    curr->next = prev; //point next to prev from basecase
+
+}
+
+Node* reverse1(Node *&head){
+    //baseCase:
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+    Node *subHead = reverse1(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return subHead;
+}
+Node* reverseLinkedList(Node *head)
+{
+//     if(head == NULL || head->next == NULL){
+//         return head;
+// }
+//    //prev will be pointing to NULL
+//    Node *prev = NULL;
+//    Node *curr =  head;
+//    Node *forward = NULL;
+
+//     while(curr != NULL){
+//         forward = curr->next;
+//         curr->next = prev;
+//         prev = curr;
+//         curr = forward;
+// 	}
+//     return prev;
+
+    //recurrsion:for loop converted to linkedList.
+//    	Node *curr =  head;
+// 	Node *prev = NULL;
+//    	reverse(head,curr,prev);
+//    	return head;
+
+    //recursion2:
+//     return reverse1(head);
+}
+
+
+// find the middle:
+int getLength(Node *head){
+    int len = 0;
+    while(head !=NULL){
+        len++;
+        head = head->next;
+}
+    return len;
+}
+Node *findMiddle(Node *head) {
+
+    //optimized:
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+//     if(head->next->next == NULL){
+//         return head->next;
+//     }
+    Node *slow = head;
+    Node *fast = head->next;
+
+    while(fast !=NULL){
+        fast = fast->next;
+        if(fast != NULL){
+            fast = fast->next;
+        }
+        slow=slow->next;
+    }
+    return slow;
+
+
+
+    //O(n) complexity:
+//     int len = getLength(head);
+//     int ans = (len/2);
+//     Node *temp = head;
+//     int cnt = 0;
+//     while(cnt < ans){
+//         temp = temp->next;
+//         cnt++;
+//     }
+//     return temp;
+
+}
+
 */
