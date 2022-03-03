@@ -1,24 +1,24 @@
 /*
-// linked list
+linked list
 #include <bits/stdc++.h>
 using namespace std;
-// Singly linked list: =>
+Singly linked list: =>
 class Node
 {
 public:
     int data;
     Node *next;
-    // constructor
+    constructor
     Node(int data)
     {
         this->data = data;
         this->next = NULL;
     }
-    // destructor:
+    destructor:
     ~Node()
     {
         int value = this->data;
-        // memory free
+        memory free
         if (this->next != NULL)
         {
             delete next;
@@ -41,7 +41,7 @@ void insertAtTail(Node *&tail, int d)
 }
 void insertAtPos(Node *&head, Node *&tail, int pos, int d)
 {
-    // insert at head/first pos:
+    insert at head/first pos:
     if (pos == 1)
     {
         insertAtHead(head, d);
@@ -54,11 +54,11 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int d)
         temp = temp->next;
         cnt++;
     }
-    // creating the node: =>
+    creating the node: =>
     Node *nodeToInsert = new Node(d);
     nodeToInsert->next = temp->next;
     temp->next = nodeToInsert;
-    // insert at tail/last pos:
+    insert at tail/last pos:
     if (temp->next == NULL)
     {
         insertAtTail(tail, d);
@@ -69,15 +69,15 @@ void deleteNode(Node *&head, int pos)
 {
     Node *temp = head->next;
 
-    if (pos == 1) // del head
+    if (pos == 1) del head
     {
         Node *temp = head;
         head = head->next;
-        // memory free start node
+        memory free start node
         temp->next = NULL;
         delete temp;
     }
-    else // del middle or tail
+    else del middle or tail
     {
         Node *curr = head;
         Node *prev = NULL;
@@ -106,22 +106,22 @@ void print(Node *&head)
 int main()
 {
     Node *node1 = new Node(10);
-    // cout << node1->data << endl;
-    // cout << node1->next << endl;
+    cout << node1->data << endl;
+    cout << node1->next << endl;
     Node *head = node1;
-    // print(head);
-    // insertAtHead(head, 12);
-    // print(head);
-    // insertAtHead(head, 15);
-    // print(head);
+    print(head);
+    insertAtHead(head, 12);
+    print(head);
+    insertAtHead(head, 15);
+    print(head);
     Node *tail = node1;
-    // print(head);
+    print(head);
     insertAtTail(tail, 12);
-    // print(head);
+    print(head);
     insertAtTail(tail, 15);
-    // print(head);
+    print(head);
     insertAtPos(head, tail, 3, 22);
-    // print(head);
+    print(head);
     insertAtPos(head, tail, 4, 25);
     print(head);
     deleteNode(head, 4);
@@ -141,7 +141,7 @@ public:
     Node *prev;
     Node *next;
 
-    // constructor:
+    constructor:
     Node(int d)
     {
         this->data = d;
@@ -149,7 +149,7 @@ public:
         this->next = NULL;
     }
 
-    // destructor:
+    destructor:
 
     ~Node()
     {
@@ -174,8 +174,8 @@ void insertAtHead(Node *&head, Node *&tail, int d)
     else
     {
         Node *temp = new Node(d);
-        temp->next = head; // previous head value stored
-        temp->prev = temp; // storing loc of itself coz now going to become a  head
+        temp->next = head; previous head value stored
+        temp->prev = temp; storing loc of itself coz now going to become a  head
         head = temp;
     }
 }
@@ -191,15 +191,15 @@ void insertAtTail(Node *&head, Node *&tail, int d)
     else
     {
         Node *temp = new Node(d);
-        tail->next = temp; // temp is new
-        temp->prev = tail; // old tail ka value
-        tail = temp;       // tail value old to new
+        tail->next = temp; temp is new
+        temp->prev = tail; old tail ka value
+        tail = temp;       tail value old to new
     }
 }
 
 void insertAtPos(Node *&head, Node *&tail, int pos, int d)
 {
-    // if first pos:
+    if first pos:
     if (pos == 1)
     {
         insertAtHead(head, tail, d);
@@ -213,14 +213,14 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int d)
         cnt++;
     }
 
-    // if last pos:
+    if last pos:
     if (temp->next == NULL)
     {
         insertAtTail(head, tail, d);
         return;
     }
 
-    // insert in pos which is in between:
+    insert in pos which is in between:
     Node *nodeToInsert = new Node(d);
 
     nodeToInsert->next = temp->next;
@@ -241,7 +241,7 @@ void deleteNode(int pos, Node *&head)
     }
     else
     {
-        // deleting any middle node or last node
+        deleting any middle node or last node
         Node *curr = head;
         Node *prev = NULL;
 
@@ -279,7 +279,7 @@ int main()
     Node *tail = NULL;
     print(head);
 
-    // head:
+    head:
     insertAtHead(head, tail, 11);
     print(head);
     insertAtHead(head, tail, 12);
@@ -287,7 +287,7 @@ int main()
     insertAtHead(head, tail, 13);
     print(head);
 
-    // tail
+    tail
     insertAtTail(head, tail, 17);
     print(head);
     insertAtTail(head, tail, 18);
@@ -295,7 +295,7 @@ int main()
     insertAtTail(head, tail, 19);
     print(head);
 
-    // insert at certain pos:
+    insert at certain pos:
     insertAtPos(head, tail, 4, 20);
     print(head);
     insertAtPos(head, tail, 5, 21);
@@ -308,7 +308,7 @@ int main()
 }
 
 //------------------------------------------------------------
-// circular linked list: only for singlylinked list:
+circular linked list: only for singlylinked list:
 #include <bits/stdc++.h>
 using namespace std;
 class Node
@@ -318,13 +318,13 @@ public:
     Node *prev;
     Node *next;
 
-    // constructor:
+    constructor:
     Node(int d)
     {
         this->data = d;
         this->next = NULL;
     }
-    // destructor:
+    destructor:
     ~Node()
     {
         int val = this->data;
@@ -337,7 +337,7 @@ public:
     }
 };
 
-// here only insert at tail will be used since there is no head to insert items.
+here only insert at tail will be used since there is no head to insert items.
 
 void insertT(Node *&tail, int element, int d)
 {
@@ -354,7 +354,7 @@ void insertT(Node *&tail, int element, int d)
         {
             curr = curr->next;
         }
-        // element found: here temp is to be place ahead of curr;
+        element found: here temp is to be place ahead of curr;
         Node *temp = new Node(d);
         temp->next = curr->next;
         curr->next = temp;
@@ -394,7 +394,7 @@ void deleteNode(Node *&tail, int d)
         if(curr == prev){
            tail =NULL;
         }
-        // >= 2 linked List
+        >= 2 linked List
         if (tail == curr)
         {
             tail = prev;
@@ -453,34 +453,35 @@ Node* reverse1(Node *&head){
 }
 Node* reverseLinkedList(Node *head)
 {
-//     if(head == NULL || head->next == NULL){
-//         return head;
-// }
-//    //prev will be pointing to NULL
-//    Node *prev = NULL;
-//    Node *curr =  head;
-//    Node *forward = NULL;
+    //using for loop :
+    if(head == NULL || head->next == NULL){
+        return head;
+}
+   //prev will be pointing to NULL
+   Node *prev = NULL;
+   Node *curr =  head;
+   Node *forward = NULL;
 
-//     while(curr != NULL){
-//         forward = curr->next;
-//         curr->next = prev;
-//         prev = curr;
-//         curr = forward;
-// 	}
-//     return prev;
+    while(curr != NULL){
+        forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+    return prev;
 
     //recursion:for loop converted to linkedList.
-//    	Node *curr =  head;
-// 	Node *prev = NULL;
-//    	reverse(head,curr,prev);
-//    	return head;
+    Node *curr =  head;
+    Node *prev = NULL;
+    reverse(head,curr,prev);
+    return head;
 
     //recursion2:
-//     return reverse1(head);
+    return reverse1(head);
 }
 
 
-// find the middle:
+find the middle:
 int getLength(Node *head){
     int len = 0;
     while(head !=NULL){
@@ -495,9 +496,9 @@ Node *findMiddle(Node *head) {
     if(head == NULL || head->next == NULL){
         return head;
     }
-//     if(head->next->next == NULL){
-//         return head->next;
-//     }
+    if(head->next->next == NULL){
+        return head->next;
+    }
     Node *slow = head;
     Node *fast = head->next;
 
@@ -513,21 +514,21 @@ Node *findMiddle(Node *head) {
 
 
     //O(n) complexity:
-//     int len = getLength(head);
-//     int ans = (len/2);
-//     Node *temp = head;
-//     int cnt = 0;
-//     while(cnt < ans){
-//         temp = temp->next;
-//         cnt++;
-//     }
-//     return temp;
+    int len = getLength(head);
+    int ans = (len/2);
+    Node *temp = head;
+    int cnt = 0;
+    while(cnt < ans){
+        temp = temp->next;
+        cnt++;
+    }
+    return temp;
 
 }
 
-// reverse in k groups :**IMPORTANT**
+reverse in k groups :**IMPORTANT**
 Node* kReverse(Node* head, int k) {
-//     base case:
+    base case:
     if(head == NULL){
         return NULL;
     }
