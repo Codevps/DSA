@@ -610,7 +610,7 @@ Node* getStartingNode(Node* head) {
     if(head == NULL)
         return NULL;
 
-    Node* intersection = floydDetectLoop(head);
+    Node* intersection = floydDetectLoop(head); //calling above function
 
     if(intersection == NULL)
         return NULL;
@@ -631,7 +631,7 @@ Node *removeLoop(Node *head)
     if( head == NULL)
         return NULL;
 
-    Node* startOfLoop = getStartingNode(head);
+    Node* startOfLoop = getStartingNode(head); //calling above function.
 
     if(startOfLoop == NULL)
         return head;
