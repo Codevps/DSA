@@ -554,4 +554,53 @@ Node* kReverse(Node* head, int k) {
     return prev;
 
 }
+
+// check if cycle is present or not::
+bool detectLoop(Node *head)
+{
+
+    if (head == NULL)
+    {
+        return true;
+    }
+
+    <map Node *, bool> visited; //vector
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        if (visited[temp] == true)
+        {
+            return true;
+        }
+        visited[temp] = true;
+        temp = temp->next;
+    }
+    return false;
+}
+//check cycle is present On space complexity
+// floyd detect algorithm uses slow and fast method : slow travels in element while fast travels across two elements in one iteration.it reduces space complexity to O(n).
+Node *floydDetect(Node *head)
+{
+    if (head == NULL)
+    {
+        return false;
+    }
+
+    Node *slow = head;
+    Node *fast = head->next;
+    while (fast != NULL && slow != NULL)
+    {
+        fast = fast->next;
+        if (fast->next != NULL)
+        {
+            fast = fast->next;
+        }
+        slow = slow->next;
+        if (fast == slow)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 */
