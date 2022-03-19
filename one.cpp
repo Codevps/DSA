@@ -69,7 +69,7 @@ void deleteNode(Node *&head, int pos)
 {
     Node *temp = head->next;
 
-    if (pos == 1) del head
+    if (pos == 1) //del head
     {
         Node *temp = head;
         head = head->next;
@@ -77,7 +77,7 @@ void deleteNode(Node *&head, int pos)
         temp->next = NULL;
         delete temp;
     }
-    else del middle or tail
+    else  //del middle or tail
     {
         Node *curr = head;
         Node *prev = NULL;
@@ -129,6 +129,7 @@ int main()
     return 0;
 }
 */
+//------------------------------------------------------------
 
 /*
 #include <bits/stdc++.h>
@@ -174,8 +175,8 @@ void insertAtHead(Node *&head, Node *&tail, int d)
     else
     {
         Node *temp = new Node(d);
-        temp->next = head; previous head value stored
-        temp->prev = temp; storing loc of itself coz now going to become a  head
+        temp->next = head; //previous head value stored
+        temp->prev = temp; //storing loc of itself coz now going to become a  head
         head = temp;
     }
 }
@@ -191,15 +192,15 @@ void insertAtTail(Node *&head, Node *&tail, int d)
     else
     {
         Node *temp = new Node(d);
-        tail->next = temp; temp is new
+        tail->next = temp; temp is new tail
         temp->prev = tail; old tail ka value
-        tail = temp;       tail value old to new
+        tail = temp;       temp becomes new tail
     }
 }
 
 void insertAtPos(Node *&head, Node *&tail, int pos, int d)
 {
-    if first pos:
+    //if first pos:
     if (pos == 1)
     {
         insertAtHead(head, tail, d);
@@ -220,7 +221,7 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int d)
         return;
     }
 
-    insert in pos which is in between:
+    //insert in pos which is in between:
     Node *nodeToInsert = new Node(d);
 
     nodeToInsert->next = temp->next;
@@ -279,7 +280,7 @@ int main()
     Node *tail = NULL;
     print(head);
 
-    head:
+   // head:
     insertAtHead(head, tail, 11);
     print(head);
     insertAtHead(head, tail, 12);
@@ -337,7 +338,7 @@ public:
     }
 };
 
-here only insert at tail will be used since there is no head to insert items.
+//here only insert at tail will be used since there is no head to insert items.
 
 void insertT(Node *&tail, int element, int d)
 {
@@ -354,7 +355,7 @@ void insertT(Node *&tail, int element, int d)
         {
             curr = curr->next;
         }
-        element found: here temp is to be place ahead of curr;
+        //element found: here temp is to be place ahead of curr;
         Node *temp = new Node(d);
         temp->next = curr->next;
         curr->next = temp;
@@ -427,6 +428,9 @@ int main()
     print(tail);
 }
 
+//------------------------------------------------------------
+
+
 //reverse linked list(singly)
 void reverse(Node *&head, Node *curr, Node *prev){
 
@@ -480,6 +484,8 @@ Node* reverseLinkedList(Node *head)
     return reverse1(head);
 }
 
+//------------------------------------------------------------
+
 
 // find the middle:
 int getLength(Node *head){
@@ -527,6 +533,9 @@ Node *findMiddle(Node *head) {
 
 }
 
+//------------------------------------------------------------
+
+
 reverse in k groups :**IMPORTANT**
 Node* kReverse(Node* head, int k) {
     base case:
@@ -545,7 +554,7 @@ Node* kReverse(Node* head, int k) {
         curr = next;
         count++;
     }
-    //setp 2: Recursion:
+    //step 2: Recursion:
     if(next !=NULL){
         head->next = kReverse( next, k) ;
     }
@@ -554,6 +563,8 @@ Node* kReverse(Node* head, int k) {
     return prev;
 
 }
+//------------------------------------------------------------
+
 
 // check if cycle is present or not::
 bool detectLoop(Node *head)
@@ -564,7 +575,7 @@ bool detectLoop(Node *head)
         return true;
     }
 
-    <map Node *, bool> visited; //vector
+    map< Node *, bool> visited; //vector
     Node *temp = head;
     while (temp != NULL)
     {
@@ -606,7 +617,7 @@ Node* floydDetectLoop(Node* head) {
 }
 
 Node* getStartingNode(Node* head) {
-
+//assuming that the given node is circular
     if(head == NULL)
         return NULL;
 
@@ -628,6 +639,7 @@ Node* getStartingNode(Node* head) {
 
 Node *removeLoop(Node *head)
 {
+    //floydDetect and getStarting node is used in this function
     if( head == NULL)
         return NULL;
 
@@ -641,9 +653,134 @@ Node *removeLoop(Node *head)
     while(temp -> next != startOfLoop) {
         temp = temp -> next;
     }
-
     temp -> next = NULL;
     return head;
 }
 
+// sort 0,1,2:::problem On tc and O1 space complexity  with no data replacement
+void insertTail(Node *&tail, Node *temp){
+    tail->next = temp;
+    tail = temp;
+}
+// no data replacement ::
+Node* sortList(Node *head)
+{
+
+    Node *zerosh = new Node(-1);
+    Node *zerost =zerosh;
+    Node *onesh = new Node(-1);
+    Node *onest = onesh;
+    Node *twosh = new Node(-1);
+    Node *twost = twosh;
+    Node *temp = head;
+
+    while(temp!= NULL){
+        if(temp->data == 0){
+            insertTail(zerost,temp);
+}        else if(temp->data == 1){
+            insertTail(onest,temp);
+}        else if(temp->data == 2){
+            insertTail(twost,temp);
+}
+        temp = temp->next;
+}
+
+//     merge:
+    if(onesh != NULL)
+  {  zerost->next = onesh->next;}
+    else
+    {zerost->next = twosh->next;}
+    onest->next = twosh->next;
+    twost->next = NULL;
+
+    head = zerosh->next;
+    delete zerosh;
+    delete onesh;
+    delete twosh;
+    return head;
+
+    //complexity of On ..sort 0 ,1 ,2:with data replacement::
+//    	Node *temp = head;
+//     int count = 0;
+//     int count1 = 0;
+//     int count2 = 0;
+//     while(temp!=NULL){
+//         if(temp->data == 0){
+//             count++;
+// 		}
+//         else if(temp->data == 1){
+//             count1++;
+// 		}
+//         else if(temp->data == 2){
+//             count2++;
+// 		}
+// 		temp = temp->next;
+// 	}
+//     	temp = head;
+//     while(temp!= NULL){
+//         if(count != 0){
+//           temp->data = 0;
+//             count--;
+// 		}
+//          else if(count1 != 0){
+//           temp->data = 1;
+//             count1--;
+// 			}
+//     	else if(count2 != 0){
+//           temp->data = 2;
+//             count2--;
+// 		}
+//         temp = temp->next;
+//     }
+//     return head;
+}
+
+
+// merge sorted linked list::
+
+Node<int> *merge(Node<int>* first, Node<int>* second){
+       if(first->next==NULL){
+       first->next=second;
+       return first;
+   }
+    Node<int> *curr1 = first;
+    Node<int> *next1 = curr1->next;
+    Node<int> *curr2 = second;
+    Node<int> *next2 = curr2->next;
+    while(next1 != NULL && curr2 !=NULL){
+        if((curr2->data >=curr1->data) && (curr2->data <= next1->data)){
+            curr1->next = curr2;
+            next2 = curr2->next ;
+            curr2->next = next1;
+            curr1 = curr2;
+            curr2 = next2;
+        }
+        else{
+            curr1 = next1;
+            next1 = next1->next;
+
+            if(next1 == NULL){
+                curr1->next = curr2;
+                return first;
+            }
+        }
+    }
+    return first;
+}
+Node<int>* sortTwoLists(Node<int>* first, Node<int>* second)
+{
+    if(first == NULL){
+        return second;
+    }
+    if(second == NULL){
+        return first;
+    }
+    if(first -> data <= second -> data ){
+        merge(first, second);
+    }
+    else
+    {
+        merge(second, first);
+    }
+}
 */

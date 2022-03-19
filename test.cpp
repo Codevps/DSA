@@ -3,9 +3,10 @@ using namespace std;
 
 /*
  * Remember to put <<time and space complexity >>limitations on the code !!!!
- */
+
 // functions-----------------------------------------------------------------------
-void fibonacci(int n)
+void fibonacci(int n) // can also be done in recursion less time complexity
+
 {
     int i = 0;
     int first = 0;
@@ -73,8 +74,11 @@ int prime(int n)
     return 0;
 }
 
-int factorial(int n)
+int factorial(int n) //done through recursion as well
 {
+    //basecase: if(n == 0) return 1;
+    //fact = n*factorial(n-1)
+    //forloop:-
     int fact = n;
     for (int i = 1; i < n; i++)
     {
@@ -144,6 +148,9 @@ void binarySearch(int n, int arr[], int key)
 
 void linearSort(int n, int arr[])
 {
+// i=> 1 to n;
+//  j=> 0 to n-1;
+
     int temp;
     for (int i = 1; i < n; i++)
     {
@@ -227,6 +234,7 @@ void swapAlternate(int n, int arr[])
 
 int unique(int n, int arr[])
 {
+    // XORRRRR elements in array <with each other>.
     // two times occuring only one element is occuring one time
     int ans = 0;
     for (int i = 0; i < n; i++)
@@ -245,6 +253,7 @@ int duplicates(int n, int arr[])
     {
         ans = ans ^ arr[i];
     }
+
     for (int i = 0; i < n; i++)
     {
         ans = ans ^ i;
@@ -429,7 +438,7 @@ void merge(int *arr, int s, int e)
     {
         arr[index++] = second[index2++];
     }
-
+//dma manual delete
     delete[] first;
     delete[] second;
 }
@@ -685,3 +694,4 @@ int allocation(int n, int arr[], int m)
     }
     return ans;
 }
+*/
