@@ -56,7 +56,6 @@ int reverse(int n)
 int prime(int n)
 {
     int i = 2;
-    {
         if (n == 2)
         {
             cout << "Prime" << endl;
@@ -70,7 +69,6 @@ int prime(int n)
         {
             cout << " not Prime " << endl;
         }
-    }
     return 0;
 }
 
@@ -234,13 +232,10 @@ void swapAlternate(int n, int arr[])
 
 int unique(int n, int arr[])
 {
-    // XORRRRR elements in array <with each other>.
+    // XORRRRR  elements in array <with each other>.
     // two times occuring only one element is occuring one time
     int ans = 0;
     for (int i = 0; i < n; i++)
-    {
-        // n^n = 0;
-        // n^0 = n;
         ans = ans ^ arr[i];
     }
     return ans;
@@ -248,6 +243,12 @@ int unique(int n, int arr[])
 
 int duplicates(int n, int arr[])
 {
+    <<
+    // 2 times xor
+    // 1st xor:: with ans, has all elements except one that is repeating
+    //2nd xor is all elements from 1 to n-1 xor with ans. so that all elements get cancelled out and only 0^x remains where x is element that occurs two times
+    >>
+
     int ans = 0;
     for (int i = 0; i < n; i++)
     {
@@ -693,5 +694,64 @@ int allocation(int n, int arr[], int m)
         mid = s + (e - s) / 2;
     }
     return ans;
+}
+
+//find key in sorted rotated array:: binary search pivot and function for conditions call findkey used
+int binary_search(int *arr, int key, int s, int e)
+{
+    int start = s;
+    int end = e;
+    int mid = start + (end - s) / 2;
+    while (start <= end)
+    {
+        if (arr[mid] == key)
+        {
+            return mid;
+        }
+        if (arr[mid] < key)
+        {
+            start = mid + 1;
+        }
+        else
+        {
+            end = mid - 1;
+        }
+        mid = start + (end - s) / 2;
+    }
+    return -1;
+}
+int pivot(int n, int *arr)
+{
+    int s = 0;
+    int e = n - 1;
+    int mid = s + (e - s) / 2;
+
+    while (s < e)
+    {
+
+        if (arr[mid] >= arr[0])
+        {
+            s = mid + 1;
+        }
+        else
+        {
+            e = mid;
+        }
+        mid = s + (e - s) / 2;
+    }
+    return s;
+}
+int find_key(int n, int *arr, int key)
+{
+    int p = pivot(n, arr);
+    if (key <= arr[n - 1] && key >= arr[p])
+    {
+        return binary_search(arr, key, p, n - 1);
+    }
+    else
+    {
+        return binary_search(arr, key, 0, p);
+    }
+    return -1;
 }
 */
